@@ -21,9 +21,23 @@
 // items[1].style.backgroundColor = "green"
 // items[2].style.display = 'none';
 
+// var list = document.querySelector('li');
+// list.style.backgroundColor="green"
+
+// var itemsList = document.querySelector('#items')
+//parent node
+// console.log(itemsList.parentNode);
+// itemsList.parentNode.style.backgroundColor ='#CCCCCC'
+// console.log(itemsList.parentElement)
+// itemsList.parentElement.style.backgroundColor ='blue'
 
 
+var head = document.querySelector('h1')
+const hellotxt = document.createTextNode('Hello');
+head.insertBefore(hellotxt,head.firstChild)
+
+var listtxt = document.querySelector('li');
+const hellotxt2 = document.createTextNode('Hello');
+listtxt.insertBefore(hellotxt2, listtxt.firstChild)
 
 
-var list = document.querySelector('li');
-list.style.backgroundColor="green"
