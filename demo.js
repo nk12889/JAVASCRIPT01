@@ -32,12 +32,14 @@
 // itemsList.parentElement.style.backgroundColor ='blue'
 
 
-var head = document.querySelector('h1')
-const hellotxt = document.createTextNode('Hello');
-head.insertBefore(hellotxt,head.firstChild)
+// var head = document.querySelector('h1')
+// const hellotxt = document.createTextNode('Hello');
+// head.insertBefore(hellotxt,head.firstChild)
 
-var listtxt = document.querySelector('li');
-const hellotxt2 = document.createTextNode('Hello');
-listtxt.insertBefore(hellotxt2, listtxt.firstChild)
+// var listtxt = document.querySelector('li');
+// const hellotxt2 = document.createTextNode('Hello');
+// // listtxt.insertBefore(hellotxt2, listtxt.firstChild)
+
+
 
 
