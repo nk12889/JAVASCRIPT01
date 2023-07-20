@@ -1,67 +1,148 @@
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
-var filter = document.getElementById('filter');
+document.addEventListener('DOMContentLoaded', function() {
+    const itemsList = document.getElementById('items');
+    const filterInput = document.getElementById('filter');
+    const addForm = document.getElementById('addForm');
+    const itemInput = document.getElementById('item');
+    const descriptionInput = document.getElementById('description');
 
-// Form submit event
-form.addEventListener('submit', addItem);
-// Delete event
-itemList.addEventListener('click', removeItem);
-// Filter event
-filter.addEventListener('keyup', filterItems);
-
-// Add item
-function addItem(e){
-  e.preventDefault();
-
-  // Get input value
-  var newItem = document.getElementById('item').value;
-
-  // Create new li element
-  var li = document.createElement('li');
-  // Add class
-  li.className = 'list-group-item';
-  // Add text node with input value
-  li.appendChild(document.createTextNode(newItem));
-
-  // Create del button element
-  var deleteBtn = document.createElement('button');
-
-  // Add classes to del button
-  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
-
-  // Append text node
-  deleteBtn.appendChild(document.createTextNode('X'));
-
-  // Append button to li
-  li.appendChild(deleteBtn);
-
-  // Append li to list
-  itemList.appendChild(li);
-}
-
-// Remove item
-function removeItem(e){
-  if(e.target.classList.contains('delete')){
-    if(confirm('Are You Sure?')){
-      var li = e.target.parentElement;
-      itemList.removeChild(li);
+    // Function to handle the delete action
+    function handleDelete(event) {
+        if (event.target.classList.contains('delete')) {
+            const listItem = event.target.parentElement;
+            itemsList.removeChild(listItem);
+        }
     }
-  }
-}
 
-// Filter Items
-function filterItems(e){
-  // convert text to lowercase
-  var text = e.target.value.toLowerCase();
-  // Get lis
-  var items = itemList.getElementsByTagName('li');
-  // Convert to an array
-  Array.from(items).forEach(function(item){
-    var itemName = item.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1){
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
+    // Function to handle the edit action (not implemented in this code)
+    function handleEdit(event) {
+        // You can implement the edit functionality here.
     }
-  });
-}
+
+    // Function to filter items based on the search string
+    function filterItems(event) {
+        const searchText = event.target.value.toLowerCase();
+        const items = itemsList.getElementsByTagName('li');
+
+        Array.from(items).forEach(function(item) {
+            const itemName = item.textContent.toLowerCase();
+            const description = item.dataset.description.toLowerCase();
+            if (itemName.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Function to add a new item to the list
+    function addItem(event) {
+        event.preventDefault();
+
+        const newItemName = itemInput.value.trim();
+        const newDescription = descriptionInput.value.trim();
+
+        if (newItemName === '') {
+            return;
+        }
+
+        const newListItem = document.createElement('li');
+        newListItem.className = 'list-group-item';
+        newListItem.dataset.description = newDescription;
+        newListItem.innerHTML = `
+            ${newItemName} <button class="btn btn-danger btn-sm float-right delete">X</button>
+            <p>${newDescription}</p>
+        `;
+
+        itemsList.appendChild(newListItem);
+
+        // Clear input fields
+        itemInput.value = '';
+        descriptionInput.value = '';
+    }
+
+    // Add click event listener to the items list to handle delete and edit actions
+    itemsList.addEventListener('click', function(event) {
+        handleDelete(event);
+        handleEdit(event);
+    });
+
+    // Add input event listener to the filter input to filter items
+    filterInput.addEventListener('input', filterItems);
+
+    // Add submit event listener to the addForm to add new items
+    addForm.addEventListener('submit', addItem);
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const itemsList = document.getElementById('items');
+    const filterInput = document.getElementById('filter');
+    const addForm = document.getElementById('addForm');
+    const itemInput = document.getElementById('item');
+    const descriptionInput = document.getElementById('description');
+
+    // Function to handle the delete action
+    function handleDelete(event) {
+        if (event.target.classList.contains('delete')) {
+            const listItem = event.target.parentElement;
+            itemsList.removeChild(listItem);
+        }
+    }
+
+    // Function to handle the edit action (not implemented in this code)
+    function handleEdit(event) {
+        // You can implement the edit functionality here.
+    }
+
+    // Function to filter items based on the search string
+    function filterItems(event) {
+        const searchText = event.target.value.toLowerCase();
+        const items = itemsList.getElementsByTagName('li');
+
+        Array.from(items).forEach(function(item) {
+            const itemName = item.textContent.toLowerCase();
+            const description = item.dataset.description.toLowerCase();
+            if (itemName.indexOf(searchText) !== -1 || description.indexOf(searchText) !== -1) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    // Function to add a new item to the list
+    function addItem(event) {
+        event.preventDefault();
+
+        const newItemName = itemInput.value.trim();
+        const newDescription = descriptionInput.value.trim();
+
+        if (newItemName === '') {
+            return;
+        }
+
+        const newListItem = document.createElement('li');
+        newListItem.className = 'list-group-item';
+        newListItem.dataset.description = newDescription;
+        newListItem.innerHTML = `
+            ${newItemName} <button class="btn btn-danger btn-sm float-right delete">X</button>
+            <p>${newDescription}</p>
+        `;
+
+        itemsList.appendChild(newListItem);
+
+        // Clear input fields
+        itemInput.value = '';
+        descriptionInput.value = '';
+    }
+
+    // Add click event listener to the items list to handle delete and edit actions
+    itemsList.addEventListener('click', function(event) {
+        handleDelete(event);
+        handleEdit(event);
+    });
+
+    // Add input event listener to the filter input to filter items
+    filterInput.addEventListener('input', filterItems);
+
+    // Add submit event listener to the addForm to add new items
+    addForm.addEventListener('submit', addItem);
+});
