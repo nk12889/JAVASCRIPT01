@@ -64,3 +64,9 @@ function filterItems(e){
     }
   });
 }
+
+localStorage.setItem('name',"Rahul")
+// localStorage.removeItem('name')
+localStorage.setItem("name 2","ankit")
+// localStorage/.clear()
+// document.cookie = 'ram', expires = ''
